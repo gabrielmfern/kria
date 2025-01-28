@@ -1,0 +1,17 @@
+{
+  "name": "kore",
+  "type": "module",
+  "scripts": {
+    "compile": "tsup",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@swc/core": "1.10.11",
+    "@types/bun": "latest",
+    "@types/firefox-webext-browser": "120.0.4",
+    "tsup": "8.3.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
