@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "kore",
+  "author": "Gabriel Miranda",
   "version": "1.0",
   "description": "reading helper",
   "permissions": [

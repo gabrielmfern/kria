@@ -1,6 +1,9 @@
 {
   "name": "kore",
   "type": "module",
+  "author": {
+    "name": "Gabriel Miranda"
+  },
   "scripts": {
     "compile": "tsup",
     "dev": "tsup --watch"
