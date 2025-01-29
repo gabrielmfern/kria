@@ -2,11 +2,9 @@ import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
-    tailwindcss(),
     solid(),
     {
       name: "zip-code",
@@ -25,7 +23,6 @@ export default defineConfig({
       name: "kore",
       formats: ["iife"],
     },
-    minify: false,
     rollupOptions: {
       output: {
         entryFileNames: "[name].js",

@@ -2,13 +2,28 @@ import { render } from "solid-js/web";
 import { Extension } from "./extension";
 
 function getSolidRoot() {
-  let solidRoot = document.getElementById("kore-solid-root");
-  if (solidRoot) return solidRoot;
+  let koreShadowDiv = document.getElementById("kore-shadow");
+  if (!koreShadowDiv) {
+    koreShadowDiv = document.createElement("div");
+    koreShadowDiv.id = "kore-shadow";
+    document.body.appendChild(koreShadowDiv);
+  }
 
-  solidRoot = document.createElement("div");
+  let koreShadow = koreShadowDiv.shadowRoot;
+  if (!koreShadow) {
+    koreShadow = koreShadowDiv.attachShadow({ mode: "open" });
+
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = browser.runtime.getURL("/dist/index.css");
+    koreShadow.appendChild(styleLink);
+  }
+
+  koreShadow.getElementById("kore-solid-root")?.remove();
+
+  const solidRoot = document.createElement("div");
   solidRoot.id = "kore-solid-root";
-  solidRoot.setAttribute("data-kore-ignore", "");
-  document.body.appendChild(solidRoot);
+  koreShadow.appendChild(solidRoot);
 
   return solidRoot;
 }
@@ -20,9 +35,6 @@ if (!document.body) {
     });
   });
 } else {
-  const root = getSolidRoot();
-  for (const child of Array.from(root.childNodes)) {
-    child.remove();
-  }
-  render(() => <Extension />, root);
+  // this means that the extension is probably reloading
+  render(() => <Extension />, getSolidRoot());
 }
