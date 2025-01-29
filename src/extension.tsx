@@ -1,7 +1,6 @@
-import { identifyAllElements } from "./identify-all-elements";
 import { createEventListener } from "@solid-primitives/event-listener";
 import { createKeyHold } from "@solid-primitives/keyboard";
-import { onMount, createSignal, Show, onCleanup } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import type { ComponentProps } from "solid-js/types/server/rendering.js";
 import "./extension.css";
 import { cn } from "./cn";
@@ -13,32 +12,49 @@ function HighlightingIndicator(props: HighlightingIndicatorProps) {
     <span
       {...props}
       class={cn(
-        "kore:z-[99999] kore:rounded-full kore:!w-[12px] kore:!h-[12px]",
-        "kore:ring-4 kore:!ring-emerald-700/40 kore:!bg-emerald-400 kore:animate-pulse kore:aria-disabled:animate-none",
+        "z-[99999] rounded-full w-[12px] h-[12px]",
+        "ring-4 ring-emerald-700/40 bg-emerald-400 animate-pulse aria-disabled:animate-none",
         props.class,
       )}
     />
   );
 }
 
+interface Highlight {
+  range: Range;
+  highlighter: HTMLSpanElement;
+}
+
 export function Extension() {
-  onMount(() => {
-    // fast enough to run in 6ms!
-    const observer = identifyAllElements(document.body)!;
-
-    onCleanup(() => {
-      observer.disconnect();
-    });
-  });
-
   const isHoldingAlt = createKeyHold("Alt");
 
+  const highlights = new Set<Highlight>();
+
   createEventListener(document, "mouseup", (event) => {
-    if (event.altKey) {
-      const selection = document.getSelection();
-      const selectedText = selection?.toString();
+    const selection = document.getSelection();
+    if (event.altKey && selection) {
+      const selectedText = selection.toString();
       if (selectedText && selectedText.trim().length > 0) {
-        console.log(event.target, selectedText);
+        const range = selection.getRangeAt(0);
+
+        for (const { highlighter } of highlights) {
+          if (range.intersectsNode(highlighter)) return;
+        }
+
+        const highlightSpan = (
+          <span
+            style={{
+              "background-color": "rgb(52 211 153 / 0.6)",
+              border: "1px solid rgb(4 120 87)",
+              "border-radius": "4px",
+            }}
+          />
+        ) as HTMLSpanElement;
+        highlights.add({
+          range,
+          highlighter: highlightSpan,
+        });
+        range.surroundContents(highlightSpan);
       }
     }
   });
@@ -57,24 +73,24 @@ export function Extension() {
   return (
     <Show when={isHoldingAlt()}>
       <HighlightingIndicator
-        class="kore:fixed kore:left-0 kore:top-0"
+        class="fixed left-0 top-0"
         style={{
           transform: `translate3D(${mousePosition().x + 10}px, ${mousePosition().y + 20}px, 0px)`,
         }}
       />
       <div
         class="
-          kore:fixed kore:right-1/2 kore:translate-x-1/2 kore:bottom-[64px]
-          kore:!w-fit kore:!h-fit kore:!z-[99999] kore:!bg-emerald-600
-          kore:!border kore:!border-solid kore:!border-emerald-700 kore:!text-white
-          kore:!flex kore:!items-center kore:!align-middle kore:!justify-center
-          kore:!rounded-[8px] kore:!gap-[6px] kore:!text-[12px] kore:!leading-[1.33333] kore:!tracking-[0] kore:!px-[12px] kore:!py-[8px]
-          kore:!select-none kore:!font-sans
+          fixed right-1/2 translate-x-1/2 bottom-[64px]
+          w-fit h-fit z-[99999] bg-emerald-600
+          border border-solid border-emerald-700 text-white
+          flex items-center align-middle justify-center
+          rounded-[8px] gap-[6px] text-[12px] leading-[1.33333] tracking-[0] px-[12px] py-[8px]
+          select-none font-sans
         "
       >
         <HighlightingIndicator aria-disabled /> Highlighting active{" "}
         <code
-          class="kore:!bg-emerald-700 kore:!px-2 kore:!py-1 kore:!m-0 kore:!rounded-[4px]"
+          class="bg-emerald-700 px-2 py-1 m-0 rounded-[4px]"
           style={{ background: "#303030" }}
         >
           alt
