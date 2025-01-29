@@ -6,7 +6,10 @@ export function identifyAllElements(
   const prefix = rawPrefix ? `${rawPrefix}-` : "";
 
   node.childNodes.forEach((childNode, key) => {
-    if (childNode instanceof Element) {
+    if (
+      childNode instanceof Element &&
+      !childNode.getAttribute("data-kore-ignore")
+    ) {
       const id = `${prefix}${key}`;
       childNode.setAttribute("data-kore-id", id);
       identifyAllElements(childNode, id, false);
@@ -17,21 +20,9 @@ export function identifyAllElements(
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "data-kore-id"
-        ) {
-          console.warn(
-            "The data-kore-id has been changed, this is unexpected",
-            {
-              hostname: location.hostname,
-            },
-          );
-          return;
-        }
-
-        if (
           mutation.type === "childList" &&
-          mutation.target instanceof Element
+          mutation.target instanceof Element &&
+          !mutation.target.getAttribute("data-kore-ignore")
         ) {
           identifyAllElements(
             mutation.target,
@@ -43,9 +34,7 @@ export function identifyAllElements(
     });
 
     observer.observe(node, {
-      attributeFilter: ["data-kore-id"],
       subtree: true,
-      attributes: true,
       childList: true,
     });
   }
