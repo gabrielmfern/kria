@@ -5,8 +5,9 @@
     "name": "Gabriel Miranda"
   },
   "scripts": {
-    "compile": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "build:zip": "rm extension.zip && zip -r extension.zip ./dist ./manifest.json",
     "lint": "biome check --write"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
     "@swc/core": "1.10.11",
     "@types/bun": "latest",
     "@types/firefox-webext-browser": "120.0.4",
+    "@types/node": "22.12.0",
     "tsup": "8.3.6"
   },
   "peerDependencies": {

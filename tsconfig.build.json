@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["tsup.config.ts"],
+  "compilerOptions": {
+    "moduleResolution": "node"
+  }
+}

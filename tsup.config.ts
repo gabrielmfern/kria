@@ -1,4 +1,4 @@
-import { $ } from "bun";
+import { spawnSync } from 'node:child_process';
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -7,8 +7,10 @@ export default defineConfig({
   target: "es3",
   format: ["cjs"],
   async onSuccess() {
-    await $`rm extension.zip`;
-    await $`zip -r extension.zip ./dist ./manifest.json`;
+    spawnSync('bun build:zip', {
+      shell: true,
+      stdio: 'inherit'
+    });
   },
   dts: false,
   outExtension() {
