@@ -1,12 +1,6 @@
 import { render } from "solid-js/web";
 import { Extension } from "./extension";
 
-declare global {
-  export interface Window {
-    koreHasAttached: boolean;
-  }
-}
-
 function getSolidRoot() {
   let solidRoot = document.getElementById("kore-solid-root");
   if (solidRoot) return solidRoot;
@@ -19,12 +13,12 @@ function getSolidRoot() {
   return solidRoot;
 }
 
-if (!window.koreHasAttached) {
+if (!document.body) {
   document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
-      window.koreHasAttached = true;
-
       render(() => <Extension />, getSolidRoot());
     });
   });
+} else {
+  render(() => <Extension />, getSolidRoot());
 }
