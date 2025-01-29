@@ -13,8 +13,8 @@ function HighlightingIndicator(props: HighlightingIndicatorProps) {
     <span
       {...props}
       class={cn(
-        "kore:z-auto kore:rounded-full kore:w-[12px] kore:h-[12px]",
-        "kore:ring-4 kore:ring-emerald-700/40 kore:bg-emerald-400 kore:animate-pulse kore:aria-disabled:animate-none",
+        "kore:z-[99999] kore:rounded-full kore:!w-[12px] kore:!h-[12px]",
+        "kore:ring-4 kore:!ring-emerald-700/40 kore:!bg-emerald-400 kore:animate-pulse kore:aria-disabled:animate-none",
         props.class,
       )}
     />
@@ -64,12 +64,12 @@ export function Extension() {
       />
       <div
         class="
-          kore:fixed kore:right-1/2 kore:-translate-x-1/2 kore:bottom-[64px]
-          kore:w-fit kore:h-fit kore:z-auto kore:bg-emerald-600
-          kore:border kore:border-solid kore:border-emerald-700 
-          kore:flex kore:items-center kore:align-middle kore:justify-center
-          kore:rounded-[8px] kore:gap-[6px] kore:text-[12px] kore:px-[12px] kore:py-[8px]
-          kore:select-none kore:!font-sans
+          kore:fixed kore:right-1/2 kore:translate-x-1/2 kore:bottom-[64px]
+          kore:!w-fit kore:!h-fit kore:!z-[99999] kore:!bg-emerald-600
+          kore:!border kore:!border-solid kore:!border-emerald-700 kore:!text-white
+          kore:!flex kore:!items-center kore:!align-middle kore:!justify-center
+          kore:!rounded-[8px] kore:!gap-[6px] kore:!text-[12px] kore:!leading-[1.33333] kore:!tracking-[0] kore:!px-[12px] kore:!py-[8px]
+          kore:!select-none kore:!font-sans
         "
       >
         <HighlightingIndicator aria-disabled /> Highlighting active{" "}
