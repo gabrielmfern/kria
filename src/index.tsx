@@ -1,21 +1,30 @@
 import { render } from "solid-js/web";
 import { Extension } from "./extension";
 
-declare namespace window {
-  export let hasRun: boolean;
+declare global {
+  export interface Window {
+    koreHasAttached: boolean;
+  }
 }
 
-(() => {
-  if (window.hasRun) {
-    return;
-  }
-  window.hasRun = true;
+function getSolidRoot() {
+  let solidRoot = document.getElementById("kore-solid-root");
+  if (solidRoot) return solidRoot;
 
+  solidRoot = document.createElement("div");
+  solidRoot.id = "kore-solid-root";
+  solidRoot.setAttribute("data-kore-ignore", "");
+  document.body.appendChild(solidRoot);
+
+  return solidRoot;
+}
+
+if (!window.koreHasAttached) {
   document.addEventListener("DOMContentLoaded", () => {
-    const solidRoot = document.createElement("div");
-    solidRoot.setAttribute("data-kore-ignore", "");
-    document.body.appendChild(solidRoot);
+    setTimeout(() => {
+      window.koreHasAttached = true;
 
-    render(() => <Extension />, solidRoot);
+      render(() => <Extension />, getSolidRoot());
+    });
   });
-})();
+}

@@ -8,7 +8,7 @@ export function identifyAllElements(
   node.childNodes.forEach((childNode, key) => {
     if (
       childNode instanceof Element &&
-      !childNode.getAttribute("data-kore-ignore")
+      childNode.getAttribute("data-kore-ignore") === null
     ) {
       const id = `${prefix}${key}`;
       childNode.setAttribute("data-kore-id", id);
@@ -22,7 +22,7 @@ export function identifyAllElements(
         if (
           mutation.type === "childList" &&
           mutation.target instanceof Element &&
-          !mutation.target.getAttribute("data-kore-ignore")
+          mutation.target.getAttribute("data-kore-ignore") === null
         ) {
           identifyAllElements(
             mutation.target,
@@ -37,5 +37,7 @@ export function identifyAllElements(
       subtree: true,
       childList: true,
     });
+
+    return observer;
   }
 }

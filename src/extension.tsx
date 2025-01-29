@@ -1,7 +1,7 @@
 import { identifyAllElements } from "./identify-all-elements";
 import { createEventListener } from "@solid-primitives/event-listener";
 import { createKeyHold } from "@solid-primitives/keyboard";
-import { onMount, createSignal, Show } from "solid-js";
+import { onMount, createSignal, Show, onCleanup } from "solid-js";
 import type { ComponentProps } from "solid-js/types/server/rendering.js";
 import "./extension.css";
 import { cn } from "./cn";
@@ -24,7 +24,11 @@ function HighlightingIndicator(props: HighlightingIndicatorProps) {
 export function Extension() {
   onMount(() => {
     // fast enough to run in 6ms!
-    identifyAllElements(document.body);
+    const observer = identifyAllElements(document.body)!;
+
+    onCleanup(() => {
+      observer.disconnect();
+    });
   });
 
   const isHoldingAlt = createKeyHold("Alt");

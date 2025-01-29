@@ -22,8 +22,10 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "./src/index.tsx"),
       fileName: "index",
-      formats: ["cjs"],
+      name: "kore",
+      formats: ["iife"],
     },
+    minify: false,
     rollupOptions: {
       output: {
         entryFileNames: "[name].js",
