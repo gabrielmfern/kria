@@ -20,5 +20,9 @@ if (!document.body) {
     });
   });
 } else {
-  render(() => <Extension />, getSolidRoot());
+  const root = getSolidRoot();
+  for (const child of Array.from(root.childNodes)) {
+    child.remove();
+  }
+  render(() => <Extension />, root);
 }
