@@ -1,6 +1,6 @@
 export function identifyAllElements(
   node: Node,
-  rawPrefix?: string,
+  rawPrefix?: string | null,
   watch = true,
 ) {
   const prefix = rawPrefix ? `${rawPrefix}-` : "";
@@ -20,7 +20,24 @@ export function identifyAllElements(
           mutation.type === "attributes" &&
           mutation.attributeName === "data-kore-id"
         ) {
-          mutation.target;
+          console.warn(
+            "The data-kore-id has been changed, this is unexpected",
+            {
+              hostname: location.hostname,
+            },
+          );
+          return;
+        }
+
+        if (
+          mutation.type === "childList" &&
+          mutation.target instanceof Element
+        ) {
+          identifyAllElements(
+            mutation.target,
+            mutation.target.getAttribute("data-kore-id"),
+            false,
+          );
         }
       }
     });
