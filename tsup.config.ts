@@ -1,4 +1,4 @@
-import { $ } from 'bun';
+import { $ } from "bun";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -7,8 +7,8 @@ export default defineConfig({
   target: "es3",
   format: ["cjs"],
   async onSuccess() {
-    await $`rm extension.zip`
-    await $`zip -r extension.zip ./dist ./manifest.json`
+    await $`rm extension.zip`;
+    await $`zip -r extension.zip ./dist ./manifest.json`;
   },
   dts: false,
   outExtension() {

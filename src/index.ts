@@ -1,6 +1,6 @@
 import { identifyAllElements } from "./identify-all-elements";
 
-declare module window {
+declare namespace window {
   export let hasRun: boolean;
 }
 

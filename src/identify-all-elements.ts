@@ -1,9 +1,10 @@
 export function identifyAllElements(
   node: Node,
-  prefix?: string,
-  watch: boolean = true,
+  rawPrefix?: string,
+  watch = true,
 ) {
-  prefix = prefix ? `${prefix}-` : "";
+  const prefix = rawPrefix ? `${rawPrefix}-` : "";
+
   node.childNodes.forEach((childNode, key) => {
     if (childNode instanceof Element) {
       const id = `${prefix}${key}`;
@@ -13,10 +14,20 @@ export function identifyAllElements(
   });
 
   if (watch) {
-    const observer = new MutationObserver((mutations) => { });
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-kore-id"
+        ) {
+          mutation.target;
+        }
+      }
+    });
 
     observer.observe(node, {
       attributeFilter: ["data-kore-id"],
+      subtree: true,
       attributes: true,
       childList: true,
     });
