@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { defineConfig } from "vite";
@@ -16,6 +17,10 @@ export default defineConfig({
       },
     },
   ],
+  test: {
+    environment: 'jsdom',
+    globals: true
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, "./src/index.tsx"),
