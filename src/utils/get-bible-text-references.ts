@@ -15,7 +15,7 @@ import { books, type BookName } from "./books";
 
 const bookName = choiceOf(
   ...books.map((book) => book.name),
-  ...books.map((book) => book.abbreviation),
+  ...books.flatMap((book) => book.alternatives),
 );
 
 const whitespace = negated(charClass(nonWhitespace, anyOf("\r\n")));
@@ -67,7 +67,8 @@ export function getBibleTextReferences(content: string) {
     if (groups) {
       const { book, chapter, verse_start, verse_end } = groups;
       const properBook = books.find(
-        ({ name, abbreviation }) => abbreviation === book || name === book,
+        ({ name, alternatives }) =>
+          (alternatives as string[]).includes(book) || name === book,
       );
       if (properBook) {
         references.push({
