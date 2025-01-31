@@ -94,7 +94,7 @@ export function Popover(allProps: PopoverProps) {
         top: `${position?.y ?? 0}px`,
       })}
       class={cn(
-        "kria-fixed kria-z-[99999] kria-h-fit kria-overflow-y-auto kria-overflow-x-hidden kria-rounded-xl kria-box-border kria-p-2",
+        "fixed z-[99999] h-fit overflow-y-auto overflow-x-hidden rounded-xl box-border p-2",
         elProps.class,
       )}
     >

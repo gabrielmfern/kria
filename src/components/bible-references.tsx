@@ -93,7 +93,7 @@ export function BibleReferences() {
           ref={setPopoverRef}
           for={hoveringState()!.hook}
           position="bottom"
-          class="kria-bg-slate-800 kria-w-60 kria-text-slate-300 kria-border kria-border-solid kria-border-slate-600"
+          class="bg-slate-800 w-60 text-slate-300 border border-solid border-slate-600"
         >
           <Passage
             book={hoveringState()!.text.reference.book}

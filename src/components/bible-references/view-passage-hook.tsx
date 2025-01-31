@@ -67,10 +67,10 @@ export function ViewPassageHook(props: ViewPassageHookProps) {
       data-visible={props.visible || hoveringText()}
       style={style()}
       class="
-        kria-opacity-0 data-[visible=true]:kria-opacity-100 kria-transition-opacity
-        kria-fixed -kria-translate-y-1/2 kria-z-[99999]
-        kria-bg-slate-800 kria-text-slate-300 kria-border kria-border-solid kria-border-slate-600
-        kria-rounded-md kria-p-0.5 kria-flex kria-justify-center kria-items-center
+        opacity-0 data-[visible=true]:opacity-100 transition-opacity
+        fixed -translate-y-1/2 z-[99999]
+        bg-slate-800 text-slate-300 border border-solid border-slate-600
+        rounded-md p-0.5 flex justify-center items-center
       "
     >
       <svg

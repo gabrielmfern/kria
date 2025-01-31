@@ -28,10 +28,10 @@ export function Passage(props: PassageProps) {
       <Show
         when={verses()}
         fallback={
-          <div class="kria-flex kria-flex-col kria-h-40 kria-justify-center kria-items-center">
+          <div class="flex flex-col h-40 justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="kria-w-1/4 kria-h-1/4 -kria-mt-6"
+              class="w-1/4 h-1/4 -mt-6"
               viewBox="0 0 24 24"
             >
               <title>404 with falling blocks</title>
@@ -42,18 +42,18 @@ export function Passage(props: PassageProps) {
                 clip-rule="evenodd"
               />
             </svg>
-            <p class="kria-text-lg">Could not find passage</p>
+            <p class="text-lg">Could not find passage</p>
           </div>
         }
       >
-        <div class="kria-flex kria-max-h-60 kria-flex-col kria-gap-2 !kria-select-text">
+        <div class="flex max-h-60 flex-col gap-2 !select-text">
           <For each={verses()}>
             {(verse, i) => (
-              <p class="kria-flex kria-gap-2 !kria-select-text">
-                <span class="kria-text-sm !kria-select-text">
+              <p class="flex gap-2 !select-text">
+                <span class="text-sm !select-text">
                   {props.verseRange[0] + i()}
                 </span>
-                <span class="kria-flex-grow kria-text-wrap kria-whitespace-normal !kria-select-text">
+                <span class="flex-grow text-wrap whitespace-normal !select-text">
                   {verse}
                 </span>
               </p>
@@ -61,7 +61,7 @@ export function Passage(props: PassageProps) {
           </For>
         </div>
         <a
-          class="kria-ml-auto kria-text-sm kria-text-white kria-underline"
+          class="ml-auto text-sm text-white underline"
           href={chapterUrl()}
           target="noreferrer"
           rel="noopener"
