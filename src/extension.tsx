@@ -5,7 +5,7 @@ export function Extension() {
   return (
     <>
       <BibleReferences />
-      <Highlighter />
+      {/* <Highlighter /> */}
     </>
   );
 }

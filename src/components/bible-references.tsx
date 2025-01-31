@@ -9,6 +9,7 @@ import {
 import { Passage } from "./bible-references/passage";
 import { ViewPassageHook } from "./bible-references/view-passage-hook";
 import { Popover } from "./ui/popover";
+import debounce from "debounce";
 
 export interface Text {
   node: Node;
@@ -35,8 +36,12 @@ function findTexts(node: Node) {
 export function BibleReferences() {
   const [texts, setTexts] = createStore<Text[]>([]);
 
-  onMount(() => {
+  const updateTexts = debounce(() => {
     setTexts(reconcile(findTexts(document.body)));
+  }, 100);
+
+  onMount(() => {
+    updateTexts();
   });
 
   createMutationObserver(
@@ -47,7 +52,7 @@ export function BibleReferences() {
     },
     (mutations) => {
       if (mutations.some((mutation) => mutation.type === "childList")) {
-        setTexts(reconcile(findTexts(document.body)));
+        updateTexts();
       }
     },
   );
@@ -91,6 +96,9 @@ export function BibleReferences() {
         <Popover
           id="kria-bible-reference-popover"
           ref={setPopoverRef}
+          onMouseDown={(event) => {
+            event.stopImmediatePropagation();
+          }}
           for={hoveringState()!.hook}
           position="bottom"
           class="bg-slate-800 w-60 text-slate-300 border border-solid border-slate-600"
