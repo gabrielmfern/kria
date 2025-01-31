@@ -17,7 +17,7 @@
   "web_accessible_resources": [
     {
       "matches": ["<all_urls>"],
-      "resources": ["dist/index.js"]
+      "resources": ["dist/index.js", "dist/index.css"]
     }
   ]
 }

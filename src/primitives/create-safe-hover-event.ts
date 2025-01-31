@@ -38,14 +38,9 @@ export function createSafeHover(options: Options) {
   let hovered: Watcher | undefined = undefined;
   createEffect(() => {
     for (const watcher of watchers()) {
-      console.log(watcher.element);
       createEventListener(watcher.element, "mouseover", () => {
-        console.log("mouse over");
         watcher.hover();
         hovered = watcher;
-      });
-      onCleanup(() => {
-        console.log("cleanup effect of events");
       });
     }
   });
@@ -78,7 +73,6 @@ export function createSafeHover(options: Options) {
     });
 
     onCleanup(() => {
-      console.log("cleanup watcher");
       setWatchers((watchers) => watchers.filter((w) => w !== watcher));
     });
   };
