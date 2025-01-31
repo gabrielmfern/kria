@@ -1,6 +1,6 @@
-import { createMemo, For, Show } from "solid-js";
+import { For, Show, createMemo } from "solid-js";
 import { bibleTranslation } from "../../utils/bible-translation";
-import { books, type BookName } from "../../utils/books";
+import { type BookName, books } from "../../utils/books";
 
 interface PassageProps {
   book: BookName;

@@ -1,10 +1,10 @@
 import { createEventListener } from "@solid-primitives/event-listener";
 import {
+  type Accessor,
   createEffect,
   createSignal,
   onCleanup,
   onMount,
-  type Accessor,
 } from "solid-js";
 
 export function isPointInside(

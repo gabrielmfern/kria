@@ -1,14 +1,14 @@
+import { createEventListener } from "@solid-primitives/event-listener";
 import {
+  type Ref,
   createMemo,
   createSignal,
-  onMount,
   onCleanup,
-  type Ref,
+  onMount,
 } from "solid-js";
-import type { Text } from "../bible-references";
 import type { JSX } from "solid-js/jsx-runtime";
-import { createEventListener } from "@solid-primitives/event-listener";
 import { isPointInside } from "../../primitives/create-safe-hover-event";
+import type { Text } from "../bible-references";
 
 interface ViewPassageHookProps {
   text: Text;

@@ -11,7 +11,7 @@ export default defineConfig({
       writeBundle() {
         spawnSync("pnpm build:css", {
           shell: true,
-          stdio: "inherit",
+          stdio: "ignore",
         });
       },
     },
@@ -20,7 +20,7 @@ export default defineConfig({
       writeBundle() {
         spawnSync("pnpm build:zip", {
           shell: true,
-          stdio: "inherit",
+          stdio: "ignore",
         });
       },
     },

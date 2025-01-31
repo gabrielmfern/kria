@@ -6,9 +6,9 @@ import {
   type TextReference,
   getBibleTextReferences,
 } from "../utils/get-bible-text-references";
-import { Popover } from "./ui/popover";
 import { Passage } from "./bible-references/passage";
 import { ViewPassageHook } from "./bible-references/view-passage-hook";
+import { Popover } from "./ui/popover";
 
 export interface Text {
   node: Node;
