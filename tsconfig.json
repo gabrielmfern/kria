@@ -26,5 +26,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["src"]
+  "include": ["."],
+  "exclude": ["dist", "node_modules", "extension.zip"]
 }

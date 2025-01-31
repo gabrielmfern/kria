@@ -1,6 +1,5 @@
 /// <reference types="vitest" />
 import { spawnSync } from "node:child_process";
-import path from "node:path";
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
 
@@ -8,9 +7,18 @@ export default defineConfig({
   plugins: [
     solid(),
     {
+      name: "compile-css",
+      writeBundle() {
+        spawnSync("pnpm build:css", {
+          shell: true,
+          stdio: "inherit",
+        });
+      },
+    },
+    {
       name: "zip-code",
       writeBundle() {
-        spawnSync("bun build:zip", {
+        spawnSync("pnpm build:zip", {
           shell: true,
           stdio: "inherit",
         });
@@ -22,19 +30,13 @@ export default defineConfig({
     globals: true,
   },
   build: {
+    watch: {
+      clearScreen: true,
+    },
     lib: {
-      entry: path.resolve(__dirname, "./src/index.tsx"),
+      entry: "./src/index.tsx",
       fileName: "index",
-      name: "kria",
-      formats: ["iife"],
+      formats: ["es"],
     },
-    // minify: false,
-    rollupOptions: {
-      output: {
-        entryFileNames: "[name].js",
-      },
-    },
-    emptyOutDir: true,
-    outDir: "dist",
   },
 });
