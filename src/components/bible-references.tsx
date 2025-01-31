@@ -101,7 +101,7 @@ export function BibleReferences() {
           }}
           for={hoveringState()!.hook}
           position="bottom"
-          class="bg-slate-800 w-60 text-slate-300 border border-solid border-slate-600"
+          class="flex-col bg-slate-800 w-60 text-slate-300 border border-solid border-slate-600"
         >
           <Passage
             book={hoveringState()!.text.reference.book}

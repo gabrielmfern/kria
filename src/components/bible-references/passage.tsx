@@ -61,7 +61,8 @@ export function Passage(props: PassageProps) {
           </For>
         </div>
         <a
-          class="ml-auto text-sm text-white underline"
+          class="text-xs mt-2 block w-full text-right text-white underline"
+          aria-label="See full chapter"
           href={chapterUrl()}
           target="noreferrer"
           rel="noopener"
