@@ -1,17 +1,17 @@
 import {
+  anyOf,
   buildRegExp,
   capture,
-  digit,
-  optional,
-  oneOrMore,
-  negated,
-  zeroOrMore,
-  choiceOf,
   charClass,
+  choiceOf,
+  digit,
+  negated,
   nonWhitespace,
-  anyOf,
+  oneOrMore,
+  optional,
+  zeroOrMore,
 } from "ts-regex-builder";
-import { books, type BookName } from "./books";
+import { type BookName, books } from "./books";
 
 const bookName = choiceOf(
   ...books.map((book) => book.name),
@@ -34,15 +34,13 @@ const bibleTextRegex = buildRegExp(
     capture(oneOrMore(digit), {
       name: "chapter",
     }),
+    referenceSeparator,
+    capture(oneOrMore(digit), { name: "verse_start" }),
     optional([
-      referenceSeparator,
-      capture(oneOrMore(digit), { name: "verse_start" }),
-      optional([
-        zeroOrMore(whitespace),
-        "-",
-        zeroOrMore(whitespace),
-        capture(oneOrMore(digit), { name: "verse_end" }),
-      ]),
+      zeroOrMore(whitespace),
+      "-",
+      zeroOrMore(whitespace),
+      capture(oneOrMore(digit), { name: "verse_end" }),
     ]),
   ],
   {
@@ -56,7 +54,7 @@ export interface TextReference {
 
   book: BookName;
   chapter: number;
-  verseRange?: [start: number, end: number];
+  verseRange: [start: number, end: number];
 }
 
 export function getBibleTextReferences(content: string) {
@@ -76,14 +74,12 @@ export function getBibleTextReferences(content: string) {
           index: match.index,
           raw: match[0],
           chapter: Number.parseInt(chapter),
-          verseRange: verse_start
-            ? [
-                Number.parseInt(verse_start),
-                verse_end
-                  ? Number.parseInt(verse_end)
-                  : Number.parseInt(verse_start),
-              ]
-            : undefined,
+          verseRange: [
+            Number.parseInt(verse_start),
+            verse_end
+              ? Number.parseInt(verse_end)
+              : Number.parseInt(verse_start),
+          ],
         });
       }
     }

@@ -18,16 +18,17 @@ export default defineConfig({
     },
   ],
   test: {
-    environment: 'jsdom',
-    globals: true
+    environment: "jsdom",
+    globals: true,
   },
   build: {
     lib: {
       entry: path.resolve(__dirname, "./src/index.tsx"),
       fileName: "index",
-      name: "kore",
+      name: "kria",
       formats: ["iife"],
     },
+    // minify: false,
     rollupOptions: {
       output: {
         entryFileNames: "[name].js",

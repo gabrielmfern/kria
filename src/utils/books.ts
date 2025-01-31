@@ -50,8 +50,14 @@ export const books = [
   { name: "Efésios", alternatives: ["Ef", "Ephesians", "Eph"] },
   { name: "Filipenses", alternatives: ["Fp", "Philippians", "Phil"] },
   { name: "Colossenses", alternatives: ["Cl", "Colossians", "Col"] },
-  { name: "1 Tessalonicenses", alternatives: ["1 Ts", "1 Thessalonians", "1 Thess"] },
-  { name: "2 Tessalonicenses", alternatives: ["2 Ts", "2 Thessalonians", "2 Thess"] },
+  {
+    name: "1 Tessalonicenses",
+    alternatives: ["1 Ts", "1 Thessalonians", "1 Thess"],
+  },
+  {
+    name: "2 Tessalonicenses",
+    alternatives: ["2 Ts", "2 Thessalonians", "2 Thess"],
+  },
   { name: "1 Timóteo", alternatives: ["1 Tm", "1 Timothy", "1 Tim"] },
   { name: "2 Timóteo", alternatives: ["2 Tm", "2 Timothy", "2 Tim"] },
   { name: "Tito", alternatives: ["Tt", "Titus", "Tit"] },
@@ -64,9 +70,7 @@ export const books = [
   { name: "2 João", alternatives: ["2 Jo", "2 John", "2 Jn"] },
   { name: "3 João", alternatives: ["3 Jo", "3 John", "3 Jn"] },
   { name: "Judas", alternatives: ["Jd", "Jude", "Jude"] },
-  { name: "Apocalipse", alternatives: ["Ap", "Revelation", "Rev"] }
-
+  { name: "Apocalipse", alternatives: ["Ap", "Revelation", "Rev"] },
 ] as const satisfies { name: string; alternatives: string[] }[];
 
-export type BookName = (typeof books)[number]['name'];
-
+export type BookName = (typeof books)[number]["name"];

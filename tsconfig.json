@@ -8,7 +8,7 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "allowJs": true,
-    "types": ["@types/firefox-webext-browser", "vitest/globals"],
+    "types": ["@types/chrome", "vitest/globals"],
 
     // Bundler mode
     "moduleResolution": "bundler",

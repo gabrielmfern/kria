@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": []
+    "ignore": ["node_modules", "dist", "bun.lock", "bible-translation.ts"]
   },
   "formatter": {
     "enabled": true,

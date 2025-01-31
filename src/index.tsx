@@ -2,28 +2,28 @@ import { render } from "solid-js/web";
 import { Extension } from "./extension";
 
 function getSolidRoot() {
-  let koreShadowDiv = document.getElementById("kore-shadow");
-  if (!koreShadowDiv) {
-    koreShadowDiv = document.createElement("div");
-    koreShadowDiv.id = "kore-shadow";
-    document.body.appendChild(koreShadowDiv);
+  let kriaShadowDiv = document.getElementById("kria-shadow");
+  if (!kriaShadowDiv) {
+    kriaShadowDiv = document.createElement("div");
+    kriaShadowDiv.id = "kria-shadow";
+    document.body.appendChild(kriaShadowDiv);
   }
 
-  let koreShadow = koreShadowDiv.shadowRoot;
-  if (!koreShadow) {
-    koreShadow = koreShadowDiv.attachShadow({ mode: "open" });
+  let kriaShadow = kriaShadowDiv.shadowRoot;
+  if (!kriaShadow) {
+    kriaShadow = kriaShadowDiv.attachShadow({ mode: "open" });
 
     const styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
-    styleLink.href = browser.runtime.getURL("/dist/index.css");
-    koreShadow.appendChild(styleLink);
+    styleLink.href = chrome.runtime.getURL("/dist/index.css");
+    kriaShadow.appendChild(styleLink);
   }
 
-  koreShadow.getElementById("kore-solid-root")?.remove();
+  kriaShadow.getElementById("kria-solid-root")?.remove();
 
   const solidRoot = document.createElement("div");
-  solidRoot.id = "kore-solid-root";
-  koreShadow.appendChild(solidRoot);
+  solidRoot.id = "kria-solid-root";
+  kriaShadow.appendChild(solidRoot);
 
   return solidRoot;
 }

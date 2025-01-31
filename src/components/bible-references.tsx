@@ -1,12 +1,16 @@
-import { createEffect, onMount } from "solid-js";
-import { createStore } from "solid-js/store";
 import { createMutationObserver } from "@solid-primitives/mutation-observer";
+import { For, Show, createSignal, onMount } from "solid-js";
+import { createStore, reconcile } from "solid-js/store";
+import { createSafeHover } from "../primitives/create-safe-hover-event";
 import {
-  getBibleTextReferences,
   type TextReference,
+  getBibleTextReferences,
 } from "../utils/get-bible-text-references";
+import { Popover } from "./ui/popover";
+import { Passage } from "./bible-references/passage";
+import { ViewPassageHook } from "./bible-references/view-passage-hook";
 
-interface Text {
+export interface Text {
   node: Node;
   reference: TextReference;
 }
@@ -25,7 +29,6 @@ function findTexts(node: Node) {
   for (const child of Array.from(node.childNodes)) {
     texts = texts.concat(findTexts(child));
   }
-
   return texts;
 }
 
@@ -33,14 +36,7 @@ export function BibleReferences() {
   const [texts, setTexts] = createStore<Text[]>([]);
 
   onMount(() => {
-    console.time('finding texts');
-    setTexts(findTexts(document.body));
-    console.timeEnd('finding texts');
-  });
-
-  createEffect(() => {
-    texts.length;
-    console.dir(texts);
+    setTexts(reconcile(findTexts(document.body)));
   });
 
   createMutationObserver(
@@ -50,25 +46,62 @@ export function BibleReferences() {
       subtree: true,
     },
     (mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.type === "childList") {
-          // console.dir(mutation);
-          // batch(() => {
-          //   for (const node of Array.from(mutation.addedNodes)) {
-          //     setTexts(
-          //       produce((texts) => {
-          //         texts.push(...findTexts(node));
-          //       }),
-          //     );
-          //   }
-          //   for (const node of Array.from(mutation.removedNodes)) {
-          //     setTexts((texts) => texts.filter((text) => text.node !== node));
-          //   }
-          // });
-        }
+      if (mutations.some((mutation) => mutation.type === "childList")) {
+        setTexts(reconcile(findTexts(document.body)));
       }
     },
   );
 
-  return <></>;
+  const [hoveringState, setHoveringState] = createSignal<
+    { text: Text; hook: HTMLSpanElement } | undefined
+  >();
+
+  const [popoverRef, setPopoverRef] = createSignal<HTMLDivElement>();
+
+  const createHoverListener = createSafeHover({
+    safezoneElements: () => [popoverRef()],
+    safetyOffset: 10,
+  });
+
+  return (
+    <>
+      <For each={texts}>
+        {(text) => (
+          <ViewPassageHook
+            visible={hoveringState()?.text === text}
+            ref={(hook) => {
+              createHoverListener({
+                element: hook,
+                hover() {
+                  setHoveringState({
+                    text,
+                    hook,
+                  });
+                },
+                leave() {
+                  setHoveringState(undefined);
+                },
+              });
+            }}
+            text={text}
+          />
+        )}
+      </For>
+      <Show when={hoveringState()}>
+        <Popover
+          id="kria-bible-reference-popover"
+          ref={setPopoverRef}
+          for={hoveringState()!.hook}
+          position="bottom"
+          class="kria-bg-slate-800 kria-w-60 kria-text-slate-300 kria-border kria-border-solid kria-border-slate-600"
+        >
+          <Passage
+            book={hoveringState()!.text.reference.book}
+            chapter={hoveringState()!.text.reference.chapter}
+            verseRange={hoveringState()!.text.reference.verseRange}
+          />
+        </Popover>
+      </Show>
+    </>
+  );
 }

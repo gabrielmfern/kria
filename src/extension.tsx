@@ -1,6 +1,6 @@
 import "./extension.css";
-import { Highlighter } from "./components/highlighter";
 import { BibleReferences } from "./components/bible-references";
+import { Highlighter } from "./components/highlighter";
 
 export function Extension() {
   return (

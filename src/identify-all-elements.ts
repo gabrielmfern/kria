@@ -8,10 +8,10 @@ export function identifyAllElements(
   node.childNodes.forEach((childNode, key) => {
     if (
       childNode instanceof Element &&
-      childNode.getAttribute("data-kore-ignore") === null
+      childNode.getAttribute("data-kria-ignore") === null
     ) {
       const id = `${prefix}${key}`;
-      childNode.setAttribute("data-kore-id", id);
+      childNode.setAttribute("data-kria-id", id);
       identifyAllElements(childNode, id, false);
     }
   });
@@ -22,11 +22,11 @@ export function identifyAllElements(
         if (
           mutation.type === "childList" &&
           mutation.target instanceof Element &&
-          mutation.target.getAttribute("data-kore-ignore") === null
+          mutation.target.getAttribute("data-kria-ignore") === null
         ) {
           identifyAllElements(
             mutation.target,
-            mutation.target.getAttribute("data-kore-id"),
+            mutation.target.getAttribute("data-kria-id"),
             false,
           );
         }
