@@ -25,15 +25,13 @@ export function Passage(props: PassageProps) {
 
   return (
     <>
-      <div class="kria-flex kria-flex-col kria-gap-2 !kria-select-text">
-        <For
-          each={verses()}
-          fallback={
+      <Show
+        when={verses()}
+        fallback={
+          <div class="kria-flex kria-flex-col kria-h-40 kria-justify-center kria-items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="kria-text-lg"
-              width="1em"
-              height="1em"
+              class="kria-w-1/4 kria-h-1/4 -kria-mt-6"
               viewBox="0 0 24 24"
             >
               <title>404 with falling blocks</title>
@@ -44,21 +42,24 @@ export function Passage(props: PassageProps) {
                 clip-rule="evenodd"
               />
             </svg>
-          }
-        >
-          {(verse, i) => (
-            <p class="kria-flex kria-gap-2 !kria-select-text">
-              <span class="kria-text-sm !kria-select-text">
-                {props.verseRange[0] + i()}
-              </span>
-              <span class="kria-flex-grow kria-text-wrap kria-whitespace-normal !kria-select-text">
-                {verse}
-              </span>
-            </p>
-          )}
-        </For>
-      </div>
-      <Show when={verses()}>
+            <p class="kria-text-lg">Could not find passage</p>
+          </div>
+        }
+      >
+        <div class="kria-flex kria-max-h-60 kria-flex-col kria-gap-2 !kria-select-text">
+          <For each={verses()}>
+            {(verse, i) => (
+              <p class="kria-flex kria-gap-2 !kria-select-text">
+                <span class="kria-text-sm !kria-select-text">
+                  {props.verseRange[0] + i()}
+                </span>
+                <span class="kria-flex-grow kria-text-wrap kria-whitespace-normal !kria-select-text">
+                  {verse}
+                </span>
+              </p>
+            )}
+          </For>
+        </div>
         <a
           class="kria-ml-auto kria-text-sm kria-text-white kria-underline"
           href={chapterUrl()}
