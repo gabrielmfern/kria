@@ -11,7 +11,7 @@ interface PassageProps {
 export function Passage(props: PassageProps) {
   const verses = createMemo(() => {
     const book = bibleTranslation.books.find((b) => b.name === props.book);
-    const allVerses = book?.chapters[props.chapter];
+    const allVerses = book?.chapters[props.chapter - 1];
 
     return allVerses?.slice(props.verseRange[0] - 1, props.verseRange[1]);
   });
