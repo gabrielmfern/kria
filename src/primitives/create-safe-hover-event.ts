@@ -48,7 +48,7 @@ export function createSafeHover(options: Options) {
   createEventListener(document, "mousemove", (event) => {
     if (!hovered) return;
 
-    const mousePoint = { x: event.pageX, y: event.pageY };
+    const mousePoint = { x: event.clientX, y: event.clientY };
     const safezones = options.safezoneElements().filter(Boolean) as Element[];
 
     if (

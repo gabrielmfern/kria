@@ -1,5 +1,5 @@
 import { createMutationObserver } from "@solid-primitives/mutation-observer";
-import { For, Show, createSignal, onMount } from "solid-js";
+import { For, Show, createComputed, createSignal, onMount } from "solid-js";
 import { createStore, reconcile } from "solid-js/store";
 import { createSafeHover } from "../primitives/create-safe-hover-event";
 import {
@@ -71,26 +71,28 @@ export function BibleReferences() {
   return (
     <>
       <For each={texts}>
-        {(text) => (
-          <ViewPassageHook
-            visible={hoveringState()?.text === text}
-            ref={(hook) => {
-              createHoverListener({
-                element: hook,
-                hover() {
-                  setHoveringState({
-                    text,
-                    hook,
-                  });
-                },
-                leave() {
-                  setHoveringState(undefined);
-                },
-              });
-            }}
-            text={text}
-          />
-        )}
+        {(text, i) =>
+          i() === 0 ? (
+            <ViewPassageHook
+              visible={hoveringState()?.text === text}
+              ref={(hook) => {
+                createHoverListener({
+                  element: hook,
+                  hover() {
+                    setHoveringState({
+                      text,
+                      hook,
+                    });
+                  },
+                  leave() {
+                    setHoveringState(undefined);
+                  },
+                });
+              }}
+              text={text}
+            />
+          ) : undefined
+        }
       </For>
       <Show when={hoveringState()}>
         <Popover

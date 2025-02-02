@@ -54,11 +54,12 @@ export function ViewPassageHook(props: ViewPassageHookProps) {
     y: Number.NEGATIVE_INFINITY,
   });
   createEventListener(document, "mousemove", (event) => {
-    setMousePosition({ x: event.pageX, y: event.pageY });
+    setMousePosition({ x: event.clientX, y: event.clientY });
   });
 
-  const hoveringText = () =>
-    isPointInside(mousePosition(), range().getBoundingClientRect(), 0);
+  const hoveringText = () => {
+    return isPointInside(mousePosition(), range().getBoundingClientRect(), 15);
+  };
 
   return (
     <span
