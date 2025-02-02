@@ -71,28 +71,26 @@ export function BibleReferences() {
   return (
     <>
       <For each={texts}>
-        {(text, i) =>
-          i() === 0 ? (
-            <ViewPassageHook
-              visible={hoveringState()?.text === text}
-              ref={(hook) => {
-                createHoverListener({
-                  element: hook,
-                  hover() {
-                    setHoveringState({
-                      text,
-                      hook,
-                    });
-                  },
-                  leave() {
-                    setHoveringState(undefined);
-                  },
-                });
-              }}
-              text={text}
-            />
-          ) : undefined
-        }
+        {(text, i) => (
+          <ViewPassageHook
+            visible={hoveringState()?.text === text}
+            ref={(hook) => {
+              createHoverListener({
+                element: hook,
+                hover() {
+                  setHoveringState({
+                    text,
+                    hook,
+                  });
+                },
+                leave() {
+                  setHoveringState(undefined);
+                },
+              });
+            }}
+            text={text}
+          />
+        )}
       </For>
       <Show when={hoveringState()}>
         <Popover
