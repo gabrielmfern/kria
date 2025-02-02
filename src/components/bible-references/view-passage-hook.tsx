@@ -70,7 +70,7 @@ export function ViewPassageHook(props: ViewPassageHookProps) {
         opacity-0 data-[visible=true]:opacity-100 transition-opacity
         fixed -translate-y-1/2 z-[99999]
         bg-slate-800 text-slate-300 border border-solid border-slate-600
-        rounded-md p-0.5 flex justify-center items-center
+        rounded-full p-0.5 flex justify-center items-center
       "
     >
       <svg
