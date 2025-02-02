@@ -7,6 +7,7 @@
     "moduleDetection": "force",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
+    "resolveJsonModule": true,
     "allowJs": true,
     "types": ["@types/chrome", "vitest/globals"],
 

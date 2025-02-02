@@ -1,6 +1,6 @@
-import { For, Show, createMemo } from "solid-js";
-import { bibleTranslation } from "../../utils/bible-translation";
+import { For, Show, createMemo, createResource } from "solid-js";
 import { type BookName, books } from "../../utils/books";
+import { useTranslation } from "../../primitives/use-translation";
 
 interface PassageProps {
   book: BookName;
@@ -9,8 +9,10 @@ interface PassageProps {
 }
 
 export function Passage(props: PassageProps) {
+  const translation = useTranslation();
+
   const verses = createMemo(() => {
-    const book = bibleTranslation.books.find((b) => b.name === props.book);
+    const book = translation()?.books.find((b) => b.name === props.book);
     const allVerses = book?.chapters[props.chapter - 1];
 
     return allVerses?.slice(props.verseRange[0] - 1, props.verseRange[1]);

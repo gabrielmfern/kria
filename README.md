@@ -1,12 +1,8 @@
 # kria
 
-<table>
-    <tr>
-        <td align="center">
-            kri'a (קְרִיאָה): reading in hebrew
-        </td>
-    </tr>
-</table>
+<h3 align="center">
+    kri'a (קְרִיאָה): reading in hebrew
+</h3>
 
 This is a reading extension that is meant to provide the usual things I want when reading
 in the browser.
