@@ -30,9 +30,6 @@ export default defineConfig({
     globals: true,
   },
   build: {
-    watch: {
-      clearScreen: true,
-    },
     lib: {
       entry: "./src/index.tsx",
       fileName: "index",
