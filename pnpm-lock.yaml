@@ -11,6 +11,9 @@ importers:
       '@floating-ui/dom':
         specifier: 1.6.13
         version: 1.6.13
+      '@solid-primitives/context':
+        specifier: 0.3.0
+        version: 0.3.0(solid-js@1.9.4)
       '@solid-primitives/event-listener':
         specifier: 2.4.0
         version: 2.4.0(solid-js@1.9.4)
@@ -556,6 +559,11 @@ packages:
     resolution: {integrity: sha512-ar80GhdZb4DgmW3myIS9nRFYcpJRSME8iqWgzH2i44u+IdrzmiXVxeFnExQ5v4JYUSpg94bWjevMG8JHf1Da5Q==}
     cpu: [x64]
     os: [win32]
+
+  '@solid-primitives/context@0.3.0':
+    resolution: {integrity: sha512-hVLWfZbXuz23gpJ+flCllbKidlIDCcSTOtlhSo9AhQ/vNiwvenLK8J4B2Hw2WCa4ETGPpQcNfgQHSNffEV5YeQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
 
   '@solid-primitives/event-listener@2.4.0':
     resolution: {integrity: sha512-TSfR1PNTfojFEYGSxSMCnUhXsaYWBo4p+cm73QmWODa9YnaQAk6PB7VjzG2bOT2D817VlvuOqTj0Qdq+MZrdGg==}
@@ -1970,6 +1978,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.32.1':
     optional: true
+
+  '@solid-primitives/context@0.3.0(solid-js@1.9.4)':
+    dependencies:
+      solid-js: 1.9.4
 
   '@solid-primitives/event-listener@2.4.0(solid-js@1.9.4)':
     dependencies:
