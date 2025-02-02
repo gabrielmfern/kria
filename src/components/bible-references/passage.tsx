@@ -46,7 +46,7 @@ export function Passage(props: PassageProps) {
           </div>
         }
       >
-        <div class="flex max-h-60 flex-col gap-2 !select-text">
+        <div class="flex flex-col max-h-60 overflow-y-auto gap-2 !select-text">
           <For each={verses()}>
             {(verse, i) => (
               <p class="flex gap-2 !select-text">
