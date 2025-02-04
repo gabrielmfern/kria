@@ -8,10 +8,7 @@
   "icons": {
     "128": "assets/kria.png"
   },
-  "permissions": [
-    "storage",
-    "scripting"
-  ],
+  "permissions": [],
   "browser_specific_settings": {
     "gecko": {
       "id": "{5591434b-4bef-4aa7-9522-8f447b2840a3}"
