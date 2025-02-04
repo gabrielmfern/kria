@@ -6,7 +6,7 @@
   "version": "1.0",
   "description": "reading helper",
   "icons": {
-    "128": "kria.png"
+    "128": "assets/kria.png"
   },
   "permissions": [
     "storage",
@@ -37,8 +37,8 @@
       "resources": [
         "dist/index.js",
         "dist/index.css",
-        "kria.png",
-        "kria.svg",
+        "assets/kria.png",
+        "assets/kria.svg",
         "AA.json"
       ]
     }
