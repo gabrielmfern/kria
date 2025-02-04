@@ -3,7 +3,7 @@
   "manifest_version": 3,
   "name": "kria",
   "author": "Gabriel Miranda",
-  "version": "1.0",
+  "version": "1.1",
   "description": "reading helper",
   "icons": {
     "128": "assets/kria.png"
