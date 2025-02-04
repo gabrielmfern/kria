@@ -5,6 +5,9 @@
   "author": "Gabriel Miranda",
   "version": "1.0",
   "description": "reading helper",
+  "icons": {
+    "128": "kria.png"
+  },
   "permissions": [
     "storage",
     "scripting"
@@ -34,6 +37,8 @@
       "resources": [
         "dist/index.js",
         "dist/index.css",
+        "kria.png",
+        "kria.svg",
         "AA.json"
       ]
     }
