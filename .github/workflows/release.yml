@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   release:
+    environment: publishing environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
