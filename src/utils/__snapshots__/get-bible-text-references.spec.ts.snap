@@ -1,0 +1,151 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getBibleTextReferences() > should work with abbreviations 1`] = `
+[
+  {
+    "book": "1 Crônicas",
+    "chapter": 2,
+    "index": 0,
+    "raw": "1 Cr 2:3-4",
+    "verseRange": [
+      3,
+      4,
+    ],
+  },
+]
+`;
+
+exports[`getBibleTextReferences() > should work with common text references 1`] = `
+[
+  {
+    "book": "João",
+    "chapter": 3,
+    "index": 0,
+    "raw": "João 3:13",
+    "verseRange": [
+      13,
+      13,
+    ],
+  },
+  {
+    "book": "Mateus",
+    "chapter": 8,
+    "index": 10,
+    "raw": "Mateus 8 27",
+    "verseRange": [
+      27,
+      27,
+    ],
+  },
+  {
+    "book": "Mateus",
+    "chapter": 14,
+    "index": 22,
+    "raw": "Mateus 14:25",
+    "verseRange": [
+      25,
+      25,
+    ],
+  },
+  {
+    "book": "Mateus",
+    "chapter": 16,
+    "index": 35,
+    "raw": "Mateus 16:16",
+    "verseRange": [
+      16,
+      16,
+    ],
+  },
+]
+`;
+
+exports[`getBibleTextReferences() > should work with lower case book names 1`] = `
+[
+  {
+    "book": "Atos",
+    "chapter": 4,
+    "index": 32,
+    "raw": "acts 4:13",
+    "verseRange": [
+      13,
+      13,
+    ],
+  },
+  {
+    "book": "Atos",
+    "chapter": 4,
+    "index": 43,
+    "raw": "at 4:10",
+    "verseRange": [
+      10,
+      10,
+    ],
+  },
+  {
+    "book": "Atos",
+    "chapter": 10,
+    "index": 52,
+    "raw": "atos 10:14",
+    "verseRange": [
+      14,
+      14,
+    ],
+  },
+]
+`;
+
+exports[`getBibleTextReferences() > should work with prefixes on verse 1`] = `
+[
+  {
+    "book": "Atos",
+    "chapter": 4,
+    "index": 0,
+    "raw": "Atos 4 v5",
+    "verseRange": [
+      5,
+      5,
+    ],
+  },
+  {
+    "book": "Atos",
+    "chapter": 9,
+    "index": 11,
+    "raw": "Atos 9, verso 4",
+    "verseRange": [
+      4,
+      4,
+    ],
+  },
+  {
+    "book": "Atos",
+    "chapter": 10,
+    "index": 28,
+    "raw": "Atos 10   , verso 10",
+    "verseRange": [
+      10,
+      10,
+    ],
+  },
+  {
+    "book": "Atos",
+    "chapter": 3,
+    "index": 50,
+    "raw": "Acts 3, verse 3",
+    "verseRange": [
+      3,
+      3,
+    ],
+  },
+  {
+    "book": "Atos",
+    "chapter": 4,
+    "index": 67,
+    "raw": "Acts 4 ver 2",
+    "verseRange": [
+      2,
+      2,
+    ],
+  },
+]
+`;

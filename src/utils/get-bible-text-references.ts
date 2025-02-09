@@ -22,6 +22,15 @@ const whitespace = negated(charClass(nonWhitespace, anyOf("\r\n")));
 
 const referenceSeparator = choiceOf(
   [zeroOrMore(whitespace), ":", zeroOrMore(whitespace)],
+  [zeroOrMore(whitespace), ".", zeroOrMore(whitespace)],
+  [zeroOrMore(whitespace), ",", zeroOrMore(whitespace)],
+  [
+    zeroOrMore(whitespace),
+    optional(","),
+    zeroOrMore(whitespace),
+    choiceOf("ver", "v", "verse", "verso"),
+    zeroOrMore(whitespace),
+  ],
   [oneOrMore(whitespace)],
 );
 
@@ -30,7 +39,7 @@ const bibleTextRegex = buildRegExp(
     capture(bookName, {
       name: "book",
     }),
-    referenceSeparator,
+    oneOrMore(whitespace),
     capture(oneOrMore(digit), {
       name: "chapter",
     }),
@@ -45,6 +54,7 @@ const bibleTextRegex = buildRegExp(
   ],
   {
     global: true,
+    ignoreCase: true,
   },
 );
 
@@ -66,7 +76,9 @@ export function getBibleTextReferences(content: string) {
       const { book, chapter, verse_start, verse_end } = groups;
       const properBook = books.find(
         ({ name, alternatives }) =>
-          (alternatives as string[]).includes(book) || name === book,
+          (alternatives as string[]).some(
+            (alt) => alt.toLowerCase() === book.toLowerCase(),
+          ) || name.toLowerCase() === book.toLowerCase(),
       );
       if (properBook) {
         references.push({
