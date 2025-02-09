@@ -10,6 +10,7 @@ import { Passage } from "./bible-references/passage";
 import { ViewPassageHook } from "./bible-references/view-passage-hook";
 import { Popover } from "./ui/popover";
 import debounce from "debounce";
+import { createEventListener } from "@solid-primitives/event-listener";
 
 export interface Text {
   node: Node;
@@ -48,10 +49,16 @@ export function BibleReferences() {
     document.body,
     {
       childList: true,
+      characterData: true,
       subtree: true,
     },
     (mutations) => {
-      if (mutations.some((mutation) => mutation.type === "childList")) {
+      if (
+        mutations.some(
+          (mutation) =>
+            mutation.type === "childList" || mutation.type === "characterData",
+        )
+      ) {
         updateTexts();
       }
     },
