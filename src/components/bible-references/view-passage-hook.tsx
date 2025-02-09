@@ -38,8 +38,8 @@ export function ViewPassageHook(props: ViewPassageHookProps) {
   const computeStyles = () => {
     const bounds = range().getBoundingClientRect();
     setStyle({
-      left: bounds.x + bounds.width + "px",
-      top: bounds.y + "px",
+      left: `${bounds.x + bounds.width}px`,
+      top: `${bounds.y}px`,
     });
   };
   onMount(() => {
@@ -64,7 +64,7 @@ export function ViewPassageHook(props: ViewPassageHookProps) {
   return (
     <span
       ref={props.ref}
-      aria-label="show content for reference"
+      aria-label={`show content for ${props.text.reference.raw}`}
       data-visible={props.visible || hoveringText()}
       style={style()}
       class="
