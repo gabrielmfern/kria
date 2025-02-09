@@ -39,7 +39,7 @@ export function BibleReferences() {
 
   const updateTexts = debounce(() => {
     setTexts(reconcile(findTexts(document.body)));
-  }, 100);
+  }, 300);
 
   onMount(() => {
     updateTexts();
