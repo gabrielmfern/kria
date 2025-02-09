@@ -8,9 +8,10 @@
     "build": "vite build",
     "build:css": "tailwindcss -i ./src/index.css -o ./dist/index.css",
     "build:zip": "rm -rf extension.zip && zip -r extension.zip ./dist ./manifest.json ./AA.json ./assets",
-    "release": "sh ./scripts/release.sh",
     "dev": "vite build --watch",
-    "lint": "biome check --write"
+    "lint": "biome check --write",
+    "release": "sh ./scripts/release.sh",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
