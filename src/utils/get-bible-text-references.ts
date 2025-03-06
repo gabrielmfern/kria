@@ -9,6 +9,7 @@ import {
   nonWhitespace,
   oneOrMore,
   optional,
+  wordBoundary,
   zeroOrMore,
 } from "ts-regex-builder";
 import { type BookName, books } from "./books";
@@ -36,6 +37,7 @@ const referenceSeparator = choiceOf(
 
 const bibleTextRegex = buildRegExp(
   [
+    wordBoundary,
     capture(bookName, {
       name: "book",
     }),
